@@ -1,0 +1,25 @@
+{
+  "slug": "JustLogic",
+  "name": "JustLogic",
+  "version": "1.0.0",
+  "license": "CC0-1.0",
+  "brand": "JustLogic",
+  "author": "Ricardo Almeida",
+  "authorEmail": "",
+  "authorUrl": "",
+  "pluginUrl": "",
+  "manualUrl": "",
+  "sourceUrl": "",
+  "donateUrl": "",
+  "changelogUrl": "",
+  "modules": [
+    {
+      "slug": "ProtoA",
+      "name": "Proto A",
+      "description": "Pitch comparation prototype",
+      "tags": [
+        "Logic"
+      ]
+    }
+  ]
+}
