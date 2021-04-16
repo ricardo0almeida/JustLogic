@@ -1,5 +1,8 @@
 #include "JL_modules.hpp"
 
+static const char noteLetters[12] = {'C', 'C', 'D', 'D', 'E', 'F', 'F', 'G', 'G', 'A', 'A', 'B'};
+static const char isSharpNote[12] = { 0,   1,   0,   1,   0,   0,   1,   0,   1,   0,   1,   0 };
+
 
 struct ProtoA : Module {
 	enum ParamIds {
@@ -19,12 +22,19 @@ struct ProtoA : Module {
 		NUM_LIGHTS
 	};
 
-	int pitchNote;
-	int octave;
+	int inPitchNote;
+	int inOctave;
+	int selectedPitchNote;
+	int selectedOctave;
 	bool result = false;
+
+	bool showDisplay = true;
+	char noteStr[4] = {'\0', '\0', '\0', '\0'};
 
 	const float trueValue = 10.f;
 	const float falseValue = 0.f;
+
+	
 
 	ProtoA() {
 		config(NUM_PARAMS, NUM_INPUTS, NUM_OUTPUTS, NUM_LIGHTS);
@@ -33,15 +43,36 @@ struct ProtoA : Module {
 	}
 
 	void process(const ProcessArgs& args) override {
+		selectedPitchNote = (int)(params[NOTE1_PARAM].getValue());
+		selectedOctave = (int)(params[OCTAVE1_PARAM].getValue());
+
+		// display selected note
+		noteStr[0] = noteLetters[selectedPitchNote];
+		int i = 1;
+		if (selectedOctave < 10)
+		{
+			noteStr[i] = selectedOctave + 48;	//ASCII char offset
+			i++;
+		}
+		if (isSharpNote[selectedPitchNote])
+		{
+			noteStr[i] = '"';
+		}else{
+			noteStr[i] = '\0';
+		}
+		i++;
+		noteStr[i] = '\0';
+		
+		// Logic calculation
 		if (inputs[PITCH1_INPUT].isConnected())
 		{
 
-			calcNoteOctave(inputs[PITCH1_INPUT].getVoltage(), &pitchNote, &octave);
-			octave += 4;
+			calcNoteOctave(inputs[PITCH1_INPUT].getVoltage(), &inPitchNote, &inOctave);
+			inOctave += 4;
 
-			if (params[OCTAVE1_PARAM].getValue() == 10.f)
+			if (selectedOctave == 10)
 			{
-				if (params[NOTE1_PARAM].getValue() == (float)pitchNote)
+				if (selectedPitchNote == inPitchNote)
 				{
 					result = true;
 				}else{
@@ -49,7 +80,7 @@ struct ProtoA : Module {
 				}
 				
 			}else{
-				if ((params[NOTE1_PARAM].getValue() == (float)pitchNote) && (params[OCTAVE1_PARAM].getValue() == (float)octave))
+				if ((selectedPitchNote == inPitchNote) && (selectedOctave == inOctave))
 				{
 					result = true;
 				}else{
@@ -86,6 +117,15 @@ struct ProtoAWidget : ModuleWidget {
 		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(9.953, 30.919)), module, ProtoA::PITCH1_INPUT));
 
 		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(69.813, 30.919)), module, ProtoA::LOGICOUT1_OUTPUT));
+
+		JLThreeDigitDisplayWidget *display = new JLThreeDigitDisplayWidget();
+		display->box.pos = Vec(85,120);
+		display->box.size = Vec(55, 24);
+		if(module){
+			display->text = module->noteStr;
+			display->on = &module->showDisplay;
+		} 
+		addChild(display);
 	}
 };
 
