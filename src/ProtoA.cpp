@@ -29,7 +29,7 @@ struct ProtoA : Module {
 	bool result = false;
 
 	bool showDisplay = true;
-	char noteStr[4] = {'\0', '\0', '\0', '\0'};
+	char noteStr[6] = {'\0', '\0', '\0', '\0'};
 
 	const float trueValue = 10.f;
 	const float falseValue = 0.f;
@@ -118,7 +118,7 @@ struct ProtoAWidget : ModuleWidget {
 
 		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(69.813, 30.919)), module, ProtoA::LOGICOUT1_OUTPUT));
 
-		JLThreeDigitDisplayWidget *display = new JLThreeDigitDisplayWidget();
+		JLDisplayWidget *display = new JLDisplayWidget();
 		display->box.pos = Vec(85,120);
 		display->box.size = Vec(55, 24);
 		if(module){

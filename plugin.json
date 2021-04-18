@@ -20,6 +20,14 @@
       "tags": [
         "Logic"
       ]
+    },
+    {
+      "slug": "NoteToLogic",
+      "name": "Note to Logic",
+      "description": "",
+      "tags": [
+        "logic"
+      ]
     }
   ]
 }

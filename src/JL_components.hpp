@@ -8,13 +8,13 @@ struct SnapJLKnob : RoundKnob {
         SnapJLKnob();
 };
 
-struct JLThreeDigitDisplayWidget : TransparentWidget {
+struct JLDisplayWidget : TransparentWidget {
 
-	bool *on;
+	bool *on = 0;
 	char *text;
 	std::shared_ptr<Font> font;
 
-	JLThreeDigitDisplayWidget();
+	JLDisplayWidget();
 
 	void draw(const DrawArgs &args) override;
 };

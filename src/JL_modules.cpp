@@ -9,6 +9,7 @@ void init(Plugin* p) {
 
 	// Add modules here
 	p->addModel(modelProtoA);
+	p->addModel(modelNoteToLogic);
 
 	// Any other plugin initialization may go here.
 	// As an alternative, consider lazy-loadSing assets and lookup tables when your module is created to reduce startup times of Rack.

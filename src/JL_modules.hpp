@@ -10,6 +10,7 @@ extern Plugin* pluginInstance;
 
 // Declare each Model, defined in each module source file
 extern Model* modelProtoA;
+extern Model* modelNoteToLogic;
 
 void calcNoteOctave(float ctrlVolt, int* pitchNote, int* octave);
 

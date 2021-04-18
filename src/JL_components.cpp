@@ -8,11 +8,11 @@ SnapJLKnob::SnapJLKnob() {
 
 
 
-JLThreeDigitDisplayWidget::JLThreeDigitDisplayWidget() {
+JLDisplayWidget::JLDisplayWidget() {
     font = APP->window->loadFont(asset::plugin(pluginInstance, "res/Fonts/DSEG14Modern-Regular.ttf"));
 };
 
-void JLThreeDigitDisplayWidget::draw(const DrawArgs &args){
+void JLDisplayWidget::draw(const DrawArgs &args){
 
     NVGcolor backgroundColor = nvgRGB(0x38, 0x38, 0x38);
     NVGcolor borderColor = nvgRGB(0x10, 0x10, 0x10);
@@ -32,7 +32,7 @@ void JLThreeDigitDisplayWidget::draw(const DrawArgs &args){
 
     NVGcolor textColor = nvgRGB(0xaf, 0xd2, 0x2c);
     nvgFillColor(args.vg, nvgTransRGBA(textColor, 16));
-    nvgText(args.vg, textPos.x, textPos.y, "~~~", NULL);
+    nvgText(args.vg, textPos.x, textPos.y, "~~~~~", NULL);
 
     if(on && *on) {
         nvgFillColor(args.vg, textColor);
