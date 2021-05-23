@@ -28,6 +28,14 @@
       "tags": [
         "logic"
       ]
+    },
+    {
+      "slug": "IfStatement",
+      "name": "IF STATEMENT",
+      "description": "",
+      "tags": [
+        "Logic"
+      ]
     }
   ]
 }

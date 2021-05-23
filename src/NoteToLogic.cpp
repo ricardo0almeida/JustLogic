@@ -388,11 +388,11 @@ struct NoteToLogicWidget : ModuleWidget {
 		MenuLabel *spacerLabel = new MenuLabel();
 		menu->addChild(spacerLabel);
 
-		MenuLabel *themeLabel = new MenuLabel();
-		themeLabel->text = "Polyphony mode";
-		menu->addChild(themeLabel);
+		MenuLabel *PolyModeLabel = new MenuLabel();
+		PolyModeLabel->text = "Polyphony mode";
+		menu->addChild(PolyModeLabel);
 
-		CommonLogicMenuItem *isCommunLogicMenuItem = createMenuItem<CommonLogicMenuItem>("Commun logic", CHECKMARK(module->isCommonLogic));
+		CommonLogicMenuItem *isCommunLogicMenuItem = createMenuItem<CommonLogicMenuItem>("Common logic", CHECKMARK(module->isCommonLogic));
 		isCommunLogicMenuItem->module = module;
 		menu->addChild(isCommunLogicMenuItem);
 
