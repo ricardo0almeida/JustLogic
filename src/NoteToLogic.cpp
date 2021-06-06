@@ -25,14 +25,6 @@ struct NoteToLogic : Module {
 		NUM_LIGHTS
 	};
 
-	enum ComparationType {
-		LT,		// <
-		LE,		// <=
-		EQ,		// ==
-		GE,		// >=
-		GT		// >
-	};
-
 	const float trueValue = 10.f;
 	const float falseValue = 0.f;
 
@@ -73,49 +65,6 @@ struct NoteToLogic : Module {
 		json_t *nChannelToFirstComparatorJ = json_object_get(rootJ, "nChannelToFirstComparator");
 		if (nChannelToFirstComparatorJ)
 			nChannelToFirstComparator = json_integer_value(nChannelToFirstComparatorJ);
-
-		
-	}
-
-	bool CompareCvToNote(float ctrlVolt, int selectedPitchNote, int selectedOctave, ComparationType selectedComparation){
-		int inPitchNote;
-		int inOctave;
-		int CVWeight;
-		int selectedNoteWeight;
-		calcNoteOctave(ctrlVolt, &inPitchNote, &inOctave);
-		inOctave += 4;
-
-		if (selectedOctave == 10)
-		{
-			CVWeight = inPitchNote;
-			selectedNoteWeight = selectedPitchNote;
-		}else{
-			CVWeight = (100 * inOctave) + inPitchNote;
-			selectedNoteWeight = (100 * selectedOctave) +  selectedPitchNote;
-		}
-
-		switch (selectedComparation)
-		{
-		case LT:
-			return (CVWeight < selectedNoteWeight);
-			break;
-		case LE:
-			return (CVWeight <= selectedNoteWeight);
-			break;
-		case EQ:
-			return (CVWeight == selectedNoteWeight);
-			break;
-		case GE:
-			return (CVWeight >= selectedNoteWeight);
-			break;
-		case GT:
-			return (CVWeight > selectedNoteWeight);
-			break;
-		
-		default:
-			return false;
-			break;
-		}
 
 		
 	}

@@ -9,7 +9,7 @@
   "authorUrl": "",
   "pluginUrl": "",
   "manualUrl": "",
-  "sourceUrl": "",
+  "sourceUrl": "https://github.com/ricardo0almeida/JustLogic",
   "donateUrl": "",
   "changelogUrl": "",
   "modules": [
@@ -26,12 +26,20 @@
       "name": "Note to Logic",
       "description": "",
       "tags": [
-        "logic"
+        "Logic"
       ]
     },
     {
       "slug": "IfStatement",
-      "name": "IF STATEMENT",
+      "name": "If Statement",
+      "description": "",
+      "tags": [
+        "Logic"
+      ]
+    },
+    {
+      "slug": "SwitchStatement",
+      "name": "Switch Statement",
       "description": "",
       "tags": [
         "Logic"

@@ -12,6 +12,25 @@ extern Plugin* pluginInstance;
 extern Model* modelProtoA;
 extern Model* modelNoteToLogic;
 extern Model* modelIfStatement;
+extern Model* modelSwitchStatement;
+
+
+struct JL_signals
+{
+	int nActiveChannels;
+	float cv[16] = {};
+	//bool enable = true;
+};
+
+enum ComparationType {
+	LT,		// <
+	LE,		// <=
+	EQ,		// ==
+	GE,		// >=
+	GT		// >
+};
 
 void calcNoteOctave(float ctrlVolt, int* pitchNote, int* octave);
+
+bool CompareCvToNote(float ctrlVolt, int selectedPitchNote, int selectedOctave, ComparationType selectedComparation);
 
