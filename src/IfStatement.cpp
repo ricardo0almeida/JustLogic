@@ -64,10 +64,12 @@ struct IfStatement : Module {
 				lights[INCV2_LIGHT].setBrightness(0.f);
 
 				// Add CV1 to IN in all active channels 
-				int nActiveChannels = std::max(std::max(1, inputs[IN1_INPUT].getChannels()) , inputs[CV1_INPUT].getChannels());
+				int nActiveChannelsIN = inputs[IN1_INPUT].getChannels();
+				int nActiveChannelsCV1 = inputs[CV1_INPUT].getChannels();
+				int nActiveChannels = std::max(std::max(1, nActiveChannelsIN) , nActiveChannelsCV1);
 				for (int i = 0; i < nActiveChannels; i++)
 				{
-					outputs[OUT1_OUTPUT].setVoltage( inputs[IN1_INPUT].getPolyVoltage(i) + inputs[CV1_INPUT].getPolyVoltage(i), i);
+					outputs[OUT1_OUTPUT].setVoltage( (i < nActiveChannelsIN ? inputs[IN1_INPUT].getPolyVoltage(i) : 0.f) + (i < nActiveChannelsCV1 ? inputs[CV1_INPUT].getPolyVoltage(i) : 0.f), i);
 				}
 				outputs[OUT1_OUTPUT].setChannels(nActiveChannels);
 			}else{
@@ -78,10 +80,12 @@ struct IfStatement : Module {
 				lights[INCV2_LIGHT].setBrightness(10.f);
 
 				// Add CV2 to IN in all active channels 
-				int nActiveChannels = std::max(std::max(1, inputs[IN1_INPUT].getChannels()) , inputs[CV2_INPUT].getChannels());
+				int nActiveChannelsIN = inputs[IN1_INPUT].getChannels();
+				int nActiveChannelsCV2 = inputs[CV2_INPUT].getChannels();
+				int nActiveChannels = std::max(std::max(1, nActiveChannelsIN) , nActiveChannelsCV2);
 				for (int i = 0; i < nActiveChannels; i++)
 				{
-					outputs[OUT1_OUTPUT].setVoltage( inputs[IN1_INPUT].getPolyVoltage(i) + inputs[CV2_INPUT].getPolyVoltage(i), i);
+					outputs[OUT1_OUTPUT].setVoltage( (i < nActiveChannelsIN ? inputs[IN1_INPUT].getPolyVoltage(i) : 0.f) + (i < nActiveChannelsCV2 ? inputs[CV2_INPUT].getPolyVoltage(i) : 0.f), i);
 				}
 				outputs[OUT1_OUTPUT].setChannels(nActiveChannels);
 			}

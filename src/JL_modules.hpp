@@ -19,7 +19,6 @@ struct JL_signals
 {
 	int nActiveChannels;
 	float cv[16] = {};
-	//bool enable = true;
 };
 
 enum ComparationType {
